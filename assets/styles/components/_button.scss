@@ -1,0 +1,8 @@
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+.btn{
+    padding: 8px 12px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
