@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello NewcharacterController!{% endblock %}
+
+{% block body %}
+<section>
+    {{ form_start(CharacterType, {
+        attr: {
+            class: 'newcharacther',
+            enctype: 'multipart/form-data'
+        }
+    }) }}
+        {{ form_widget(CharacterType) }}
+        <button class="btn-primary">Ajouter</button>
+    {{ form_end(CharacterType) }}
+</section>
+{% endblock %}

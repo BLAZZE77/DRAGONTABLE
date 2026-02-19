@@ -9,17 +9,22 @@
         {% endblock %}
 
 <body>
-  <nav>
+  <nav class="nav">
+  <div class="navlogo">
+    <img src="{{ asset('img/site/logo.png') }}" alt="DragonTable logo">
     <a href="{{ path('app_home') }}">DragonTable</a>
-    <ul>
-      <li><a href="">Personnage</a></li>
-      <li><a href="">Trouver une table</a></li>
-    </ul>
-    <div>
-      <a href="{{ path('app_login') }}">Connexion</a>
-      <a href="">Enregistrement</a>
-    </div>
-  </nav>
+  </div>
+
+  <ul class="navlink">
+    <li><a href="">Personnage</a></li>
+    <li><a href="">Trouver une table</a></li>
+  </ul>
+
+  <div class="navactions">
+    <a class="btn btnoutline" href="{{ path('app_login') }}">Connexion</a>
+    <a class="btn btnsolid" href="">Enregistrement</a>
+  </div>
+</nav>
   {% block body %}{% endblock %}
 
   {% block javascripts %}{% endblock %}

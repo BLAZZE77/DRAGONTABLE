@@ -1,8 +1,35 @@
 @use "../base/variables" as *;
 @use "../base/mixins" as *;
-.btn{
-    padding: 8px 12px;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
+
+
+.btn {
+  font-family: $font-title;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.btnoutline {
+  background: transparent;
+  border: 2px solid $color-dragon;
+  color: $primary-color;
+
+  &:hover {
+    background: rgba($color-dragon, 0.15);
+  }
+}
+
+.btnsolid {
+  color: $primary-color;
+  background: $color-dragon;
+  border-radius: 3px;
+    
+
+  &:hover {
+    background: darken($color-dragon, 10%);
+  }
 }

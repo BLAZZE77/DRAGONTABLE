@@ -1,2 +1,60 @@
 @use "../base/variables" as *;
 @use "../base/mixins" as *;
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 100px;
+  overflow: visible;
+}
+
+.navlogo {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+
+  img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+  }
+
+  a {
+    font-size: 3.5rem;
+    text-decoration: none;
+    font-family: $font-style;
+    color: $primary-color;
+    transition: color 0.2s;
+    
+    &:hover {
+    color: $color-dragon;
+  }
+  }
+}
+
+.navlink {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  a {
+    font-size: 1.5rem !important;
+    text-decoration: none;
+    font-family: $font-title;
+    color: $primary-color;
+    transition: color 0.2s;
+    
+    &:hover {
+    color: $color-dragon;
+  }
+  }
+}
+
+.navactions {
+  display: flex;
+  gap: 0.75rem;
+}
