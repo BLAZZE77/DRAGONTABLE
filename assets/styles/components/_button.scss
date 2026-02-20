@@ -1,6 +1,6 @@
 @use "../base/variables" as *;
 @use "../base/mixins" as *;
-
+@use 'sass:color';
 
 .btn {
   font-family: $font-title;
@@ -30,6 +30,6 @@
     
 
   &:hover {
-    background: darken($color-dragon, 10%);
+    background: color.adjust($color-dragon, $lightness: -10%);
   }
 }

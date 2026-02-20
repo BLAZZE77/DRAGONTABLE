@@ -2,12 +2,14 @@
 @use "../base/mixins" as *;
 
 .nav {
+  background-color: #0a0a0a;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
   height: 100px;
   overflow: visible;
+  border-bottom: 2px solid $color-dragon;
 }
 
 .navlogo {
@@ -26,7 +28,6 @@
     text-decoration: none;
     font-family: $font-style;
     color: $primary-color;
-    transition: color 0.2s;
     
     &:hover {
     color: $color-dragon;

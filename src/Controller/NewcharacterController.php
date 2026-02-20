@@ -17,10 +17,11 @@ final class NewcharacterController extends AbstractController
     public function index(Request $request , EntityManagerInterface $entityManager): Response
     {
         $character = new Character();
-        $form = $this->CreateForm(CharacterType::class,$character);
+        $form = $this->createForm(CharacterType::class, $character);
+        $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $character->setUser($this->getUser());
+            $character->setOwner($this->getUser());
             $entityManager->persist($character);
             $entityManager->flush();
             $this->addFlash('succes','Personnage créé avec succès !');

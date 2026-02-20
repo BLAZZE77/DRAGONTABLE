@@ -5,6 +5,13 @@
 {% block body %}
             {% block nav %}
             {% endblock %}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+<form method="post">
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -37,4 +44,5 @@
             Sign in
         </button>
     </form>
+    <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublier ?</a>
 {% endblock %}
