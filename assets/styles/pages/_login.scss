@@ -1,0 +1,53 @@
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+
+.register-form-container {
+    .alert {
+        width: 100%;
+        max-width: 400px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    .alert-success {
+        background-color: green;
+        color: white;
+        border: 1px solid green;
+    }
+
+    .alert-danger {
+        background-color: red;
+        color: black;
+        border: 1px solid red;
+    }
+
+    .alert-info {
+        background-color: $color-dragon;
+        color: black;
+        border: 1px solid red;
+    }
+}
+
+.register-links {
+    margin-top: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    
+    p {
+        margin-bottom: 0.5rem;
+    }
+    
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    
+    input {
+        width: 100%;
+        padding: 0.5rem;
+        margin-top: 0.25rem;
+    }
+}

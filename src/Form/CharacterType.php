@@ -19,7 +19,6 @@ class CharacterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
 {
     $builder
-        ->add('name')
         ->add('race', EntityType::class, [
             'class' => Race::class,
             'choice_label' => 'name',
@@ -46,6 +45,15 @@ class CharacterType extends AbstractType
                     'mimeTypesMessage' => 'Veuillez uploader une image valide (JPEG,PNG,GIF).',
                 ])
             ],
+        ])
+        ->add('physique', null,[
+        'required' => false,
+        ])
+        ->add('name', null, [
+        'required' => true,
+        ])
+         ->add('description', null,[
+        'required' => false,
         ])
     ;
 }

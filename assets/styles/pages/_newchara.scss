@@ -1,0 +1,545 @@
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+
+
+.wizardbar {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 2rem 0;
+    background: rgba(0, 0, 0, 0.3);
+
+    .wizardstep {
+        padding: 1rem 2.5rem;
+        font-family: $font-title;
+        font-size: 0.9rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: $text-muted;
+        border-bottom: 2px solid transparent;
+        transition: all 0.3s;
+
+        &.active {
+            color: $color-dragon;
+            border-bottom-color: $color-dragon;
+        }
+    }
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+
+.wizardpage {
+    display: none;
+    min-height: calc(100vh - 200px);
+    padding: 3rem 4rem;
+
+    &.active {
+        display: block;
+    }
+
+    &.nopadding {
+        padding: 4rem 0;
+        min-height: 0;
+        align-items: center;    
+        min-height: calc(100vh - 130px); 
+    }
+}
+
+.wizardtitle {
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+.wizardnav {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-wizard-prev {
+    background: transparent;
+    border: 1px solid $color-dragon;
+    color: $primary-color;
+    padding: 0.75rem 2rem;
+    font-family: $font-title;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+
+    &:hover {
+        background: rgba($color-dragon, 0.15);
+    }
+}
+
+.btn-wizard-next {
+    background: $color-dragon;
+    border: none;
+    color: #fff;
+    padding: 0.75rem 2rem;
+    font-family: $font-title;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+
+    &:hover {
+        background: darken($color-dragon, 10%);
+    }
+}
+
+.btn-wizard-submit {
+    background: $color-dragon;
+    border: none;
+    color: #fff;
+    padding: 0.75rem 3rem;
+    font-family: $font-title;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+
+    &:hover {
+        background: darken($color-dragon, 10%);
+    }
+}
+
+
+.raceselect {
+    display: flex;
+    gap: 4rem;
+    min-height: 70vh;
+    padding: 2rem;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 2rem;
+        min-height: auto;
+        padding: 1rem;
+    }
+}
+
+
+.racegauche {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 768px) {
+        flex: none;
+    }
+}
+
+.raceimg {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 3 / 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    .raceitem {
+        width: 100%;
+        height: 100%;
+
+        &.active {
+            display: flex !important;
+            align-items: flex-end;
+            justify-content: center;
+            animation: raceFadeIn 0.4s ease;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: bottom center;
+            filter: drop-shadow(0 0 30px rgba(139, 0, 0, 0.3));
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: scale(1.03);
+            }
+        }
+    }
+}
+
+.racearrows {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.racearrow {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: $text-light;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    &:hover {
+        background: rgba(139, 16, 16, 0.4);
+        border-color: $color-dragon;
+        color: #fff;
+    }
+
+    &:active {
+        transform: scale(0.92);
+    }
+}
+
+
+
+.racedroite {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 0;
+
+    .wizardnav {
+        justify-content: flex-start;
+        padding-left: 0;
+
+        @media (max-width: 768px) {
+            justify-content: center;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        padding: 0;
+        text-align: center;
+    }
+
+    .raceinfo {
+        &.active {
+            display: block !important;
+            animation: raceFadeIn 0.4s ease;
+        }
+
+        h2 {
+            color: $text-light ;
+            margin-bottom: 1.2rem;
+            text-transform: capitalize;
+            letter-spacing: 0.05em;
+            
+            p {
+            padding-left: 0;
+            }
+            &::after {
+                content: '';
+                display: block;
+                width: 60px;
+                height: 2px;
+                background: $color-dragon;
+                margin-top: 0.6rem;
+
+                @media (max-width: 768px) {
+                    margin-inline: auto;
+                }
+            }
+        }
+
+        p {
+            color: #a8a8a8;
+            font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+            line-height: 1.75;
+            max-width: 650px;
+
+            @media (max-width: 768px) {
+                max-width: 100%;
+            }
+        }
+    }
+}
+
+.wizardnav {
+    margin-top: 2.5rem;
+
+    @media (max-width: 768px) {
+        display: flex;
+        justify-content: flex-start;
+    }
+}
+
+.btn-wizard-next {
+    display: inline-block;
+    padding: 0.85rem 2.5rem;
+    background: $color-dragon;
+    border: 1px solid $color-dragon;
+    color: $text-light;
+    font-family: 'MedievalSharp', 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: $color-dragon;
+        border-color: $color-dragon;
+        box-shadow: 0 0 20px rgba(139, 16, 16, 0.4);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes raceFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+#character_race {
+    display: none;
+}
+
+.tarotgrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+
+    @media (max-width: 1024px) {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    @media (max-width: 480px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+}
+
+.tarotcard {
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border: 2px solid transparent;
+        transition: border 0.3s;
+    }
+
+    h3 {
+        font-family: $font-title;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: $text-muted;
+        margin-top: 0.5rem;
+    }
+
+    &:hover {
+        transform: translateY(-8px);
+
+        img {
+            border-color: $color-dragon;
+        }
+    }
+
+    &.selected {
+        transform: translateY(-12px);
+
+        img {
+            border-color: $color-dragon;
+            box-shadow: 0 10px 30px rgba($color-dragon, 0.4);
+        }
+
+        h3 {
+            color: $color-dragon;
+        }
+    }
+}
+
+#character_classe {
+    display: none;
+}
+
+.backgroundform {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+        max-width: 100%;
+        padding: 1rem;
+    }
+}
+
+.formgroupe {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formlabel {
+    font-family: $font-title;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $text-muted;
+
+    .optionnel {
+        font-family: $font-body;
+        font-size: 0.75rem;
+        text-transform: none;
+        letter-spacing: normal;
+        color: rgba($text-muted, 0.5);
+    }
+}
+
+.forminput {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #e8e0d4;
+    font-family: $font-body;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+
+    &:focus {
+        outline: none;
+        border-color: $color-dragon;
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 12px rgba($color-dragon, 0.15);
+    }
+
+    &::placeholder {
+        color: rgba($text-muted, 0.4);
+    }
+}
+
+.formselect {
+    appearance: none;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+
+    option {
+        background: #1a1a1a;
+        color: #e8e0d4;
+    }
+}
+
+.formtextarea {
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.7;
+}
+
+.formfile {
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+
+    &::file-selector-button {
+        padding: 0.5rem 1.2rem;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #e8e0d4;
+        font-family: $font-title;
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        margin-right: 1rem;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: rgba($color-dragon, 0.3);
+            border-color: $color-dragon;
+        }
+    }
+}
+
+
+.btn-wizard-submit {
+    display: inline-block;
+    padding: 0.85rem 2.5rem;
+    background: $color-dragon;
+    border: 1px solid lighten($color-dragon, 8%);
+    color: #f0e6d6;
+    font-family: $font-title;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: lighten($color-dragon, 8%);
+        border-color: lighten($color-dragon, 15%);
+        box-shadow: 0 0 25px rgba($color-dragon, 0.5);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+
+.wizardtitre {
+    text-align: center;
+    font-family: $font-title;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #e8e0d4;
+    margin-bottom: 2.5rem;
+    padding-top: 1rem;
+
+    &::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 2px;
+        background: $color-dragon;
+        margin: 0.8rem auto 0;
+    }
+}
+
+
+.required {
+    display: none !important
+}

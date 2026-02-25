@@ -2,4 +2,226 @@
 @use "../base/mixins" as *;
 
 
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #0a0a0a;
 
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('../../../public/img/site/hero-bg.png');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.35);
+    z-index: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(0,0,0,0.7) 100%),
+                linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.6) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+}
+
+.herocontent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: heroFadeIn 1.2s ease both;
+}
+
+.heroeyebrow {
+  font-size: 0.9rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: $gold;
+  margin: 0;
+}
+
+.herotitle {
+  font-family: $font-style;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 100;
+  color: $primary-color;
+  margin: 0;
+  line-height: 1;
+
+  span { color: $color-dragon; }
+}
+
+.herosubtitle {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-style: italic;
+  color: $text-muted;
+  margin: 0;
+}
+
+.heroscroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: rgba(255,255,255,0.5);
+  transition: color 0.3s ease;
+
+  svg {
+    width: 28px;
+    height: 28px;
+    animation: scrollBounce 1.8s ease-in-out infinite;
+  }
+
+  &:hover { color: $gold; }
+}
+
+.ad {
+  position: relative;
+  padding: 80px 48px;
+  background-color: $dark-bg;
+
+}
+
+.adgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.adcard {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #1e2a20;
+  border-radius: 8px;
+  overflow: visible;
+  min-height: 220px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.7);
+  }
+}
+
+.adgrow {
+  &:hover .adimage img {
+    transform: scale(1.1) translateY(-15px);
+  }
+}
+
+.adimage {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  overflow: visible;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #1e2a20 0%, transparent 40%);
+    z-index: 1;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.5s ease;
+    display: block;
+  }
+}
+
+.adgold {
+  background: #3d2e0a;
+
+  .adimage::before {
+    background: linear-gradient(to right, #3d2e0a 0%, transparent 40%);
+  }
+}
+
+.adcontent {
+  flex: 0 0 55%;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 2;
+
+  h3 {
+    font-size: clamp(1.3rem, 2vw, 1.8rem);
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+  }
+
+  p {
+    font-size: 1rem;
+    color: $text-muted;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  a {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 11px 24px;
+    background: #fff;
+    color: #111;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    align-self: flex-start;
+    transition: background 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background: $color-dragon;
+      color: #fff;
+    }
+  }
+}
+
+
+
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(10px); }
+}

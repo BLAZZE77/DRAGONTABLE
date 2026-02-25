@@ -3,16 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\CharacterRepository;
-use Doctrine\DBAL\Schema\Column;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\GeneratedValue;
-use Doctrine\ORM\Mapping\Id;
-use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
 use App\Entity\Race;
 use App\Entity\User;
 use App\Entity\Classe;
@@ -53,6 +48,12 @@ class Character
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $description = null;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $physique = null;
 
     public function getId(): ?int
     {
@@ -152,5 +153,29 @@ class Character
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getPhysique(): ?string
+    {
+        return $this->physique;
+    }
+
+    public function setPhysique(?string $physique): static
+    {
+        $this->physique = $physique;
+
+        return $this;
     }
 }

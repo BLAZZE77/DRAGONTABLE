@@ -9,7 +9,9 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^7.2.0"
+    "@fortawesome/fontawesome-free": "^7.2.0",
+    "@symfony/stimulus-bridge": "^4.0.1",
+    "core-js": "^3.48.0"
   },
   "scripts": {
     "dev": "npx encore dev",

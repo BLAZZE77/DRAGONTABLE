@@ -3,17 +3,21 @@
 {% block title %}Hello CharacterController!{% endblock %}
 
 {% block body %}
-
-{% for character in character %} 
-            <div class="card">
-                    <img src="{{ asset('img/user/chara/' ~ character.imageName) }}">
-                <div class="card-content">
-                    <h3>{{character.name}}</h3>
-                    <p>{{character.race.name}}</p>
-                    <p>{{character.classe.name}}</p>
-                    <p>{{character.background.name}}</p>
-                </div>
-                <a href="{{ path('app_character_delete', {id: character.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnage ?')">Supprimer</a>
-            </div>  
+    {% for flash_error in app.flashes('succes') %}
+            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
+
+    {% for character in character %} 
+                <div class="card">
+                        <img src="{{ asset('img/user/chara/' ~ character.imageName) }}">
+                    <div class="card-content">
+                        <h3>{{character.name}}</h3>
+                        <p>{{character.race.name}}</p>
+                        <p>{{character.classe.name}}</p>
+                        <p>{{character.background.name}}</p>
+                    </div>
+                    <a href="{{ path('app_character_delete', {id: character.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnage ?')">Supprimer</a>
+                    <a href="{{ path('app_character_edit', {id: character.id}) }}">Modifier</a>
+                </div>  
+        {% endfor %}
 {% endblock %}

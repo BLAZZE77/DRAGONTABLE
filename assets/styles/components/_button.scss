@@ -13,6 +13,18 @@
   transition: all 0.25s;
 }
 
+
+.btn-back {
+  font-family: $font-title;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
 .btnoutline {
   background: transparent;
   border: 2px solid $color-dragon;
@@ -32,4 +44,17 @@
   &:hover {
     background: color.adjust($color-dragon, $lightness: -10%);
   }
+}
+
+
+.back {
+  color: gray;
+}
+
+
+.nostyle {
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s;
 }

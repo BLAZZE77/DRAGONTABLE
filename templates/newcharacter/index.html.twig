@@ -1,17 +1,135 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello NewcharacterController!{% endblock %}
+{% block title %}Créer un personnage{% endblock %}
 
 {% block body %}
-<section>
-    {{ form_start(CharacterType, {
-        attr: {
-            class: 'newcharacther',
-            enctype: 'multipart/form-data'
-        }
-    }) }}
-        {{ form_widget(CharacterType) }}
-        <button class="btn-primary">Ajouter</button>
-    {{ form_end(CharacterType) }}
-</section>
+
+{{ form_start(CharacterType, {
+    attr: {
+        class: 'newcharacter',
+        enctype: 'multipart/form-data',
+        novalidate: 'novalidate'
+    }
+}) }}
+
+<div class="wizardbar">
+    <div class="wizardstep active" data-step="1">Race</div>
+    <div class="wizardstep" data-step="2">Classe</div>
+    <div class="wizardstep" data-step="3">Background</div>
+    <div class="wizardstep" data-step="4">Apparence</div>
+    <div class="wizardstep" data-step="5">Nom</div>
+</div>
+
+<div class="wizardpage nopadding  active" id="step1">
+    <div class="raceselect">
+        
+        <div class="racegauche">
+           
+            <div class="raceimg">
+                {% for race in races %}
+                    <div class="raceitem" data-id="{{ race.id }}" style="display:none">
+                        <img src="{{ asset('img/site/race/' ~ race.name|lower ~ '.png') }}">
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="racearrows">
+                <button type="button" id="raceprev" class="racearrow">‹</button>
+                <button type="button" id="racenext" class="racearrow">›</button>
+            </div>
+        </div>
+        
+        <div class="racedroite">
+            {% for race in races %}
+                <div class="raceinfo" style="display:none">
+                    <h2>{{ race.name }}</h2>
+                    <p>{{ race.description }}</p>
+                </div>
+            {% endfor %}
+        <div class="wizardnav"> 
+            <button type="button" class="btn-wizard-next" id="raceselect">Continuer →</button>
+        </div>
+        </div>
+    </div>
+    {{ form_row(CharacterType.race,{'type': 'hidden'}) }}
+    
+</div>
+
+<div class="wizardpage" id="step2">
+    <h2 class="wizardtitre">Choisissez votre classe</h2>
+    <div class="tarotgrid">
+        {% for item in classe %}
+            <div class="tarotcard" data-id="{{ item.id }}" data-name="{{ item.name }}">
+                <img src="{{ asset('img/site/classe/' ~ item.name|lower ~ '.png') }}">
+                <h3>{{ item.name }}</h3>
+            </div>
+        {% endfor %}
+    </div>
+    {{ form_row(CharacterType.classe) }}
+    <div class="wizardnav">
+        <button type="button" class="btn-wizard-prev">← Retour</button>
+        <button type="button" class="btn-wizard-next">Continuer →</button>
+    </div>
+</div>
+
+    <div class="wizardpage nopadding" id="step3">
+        <h2 class="wizardtitre">Votre Histoire</h2>
+        
+        <div class="backgroundform">
+            <div class="formgroupe">
+                <label class="formlabel">Background</label>
+                {{ form_widget(CharacterType.background, {'attr': {'class': 'forminput formselect'}}) }}
+            </div>
+
+            <div class="formgroupe">
+                <label class="formlabel">Description <span class="optionnel">(Optionnel)</span></label>
+                {{ form_widget(CharacterType.description, {'attr': {'class': 'forminput formtextarea', 'placeholder': 'Décrivez l\'histoire de votre personnage...', 'rows': 6}}) }}
+            </div>
+        </div>
+
+        <div class="wizardnav">
+            <button type="button" class="btn-wizard-prev">← Retour</button>
+            <button type="button" class="btn-wizard-next">Continuer →</button>
+        </div>
+    </div>
+
+
+<div class="wizardpage" id="step4">
+    <h2 class="wizardtitre">Votre Apparence</h2>
+
+    <div class="backgroundform">
+        <div class="formgroupe">
+            <label class="formlabel">Portrait du personnage <span class="optionnel">(Optionnel)</span></label>
+            {{ form_widget(CharacterType.imageFile, {'attr': {'class': 'forminput formfile'}}) }}
+        </div>
+
+        <div class="formgroupe">
+            <label class="formlabel">Description physique <span class="optionnel">(Optionnel)</span></label>
+            {{ form_widget(CharacterType.physique, {'attr': {'class': 'forminput formtextarea', 'placeholder': 'Décrivez l\'apparence physique de votre personnage...', 'rows': 6}}) }}
+        </div>
+    </div>
+
+    <div class="wizardnav">
+        <button type="button" class="btn-wizard-prev">← Retour</button>
+        <button type="button" class="btn-wizard-next">Continuer →</button>
+    </div>
+</div>
+
+<div class="wizardpage" id="step5">
+    <h2 class="wizardtitre">Nommez Votre Héros</h2>
+
+    <div class="backgroundform">
+        <div class="formgroupe">
+            <label class="formlabel">Nom du personnage</label>
+            {{ form_widget(CharacterType.name, {'attr': {'class': 'forminput', 'placeholder': 'Entrez le nom de votre héros...'}}) }}
+        </div>
+    </div>
+
+    <div class="wizardnav">
+        <button type="button" class="btn-wizard-prev">← Retour</button>
+        <button type="submit" class="btn-wizard-submit">Créer mon personnage</button>
+    </div>
+</div>
+
+{{ form_end(CharacterType) }}
+
 {% endblock %}
