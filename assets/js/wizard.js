@@ -1,6 +1,6 @@
-// WIZARD - navigation entre pages
 const pages = document.querySelectorAll('.wizardpage');
 const steps = document.querySelectorAll('.wizardstep');
+const formPage = document.querySelector('.newcharacter');
 let current = 0;
 
 function showPage(index) {
@@ -15,6 +15,10 @@ document.querySelectorAll('.btn-wizard-next').forEach(btn => {
         if (current < pages.length - 1) {
             current++;
             showPage(current);
+            
+            if (current > 0) {
+                formPage.style.backgroundImage = 'none';
+            }
         }
     });
 });
@@ -24,11 +28,17 @@ document.querySelectorAll('.btn-wizard-prev').forEach(btn => {
         if (current > 0) {
             current--;
             showPage(current);
+          
+            if (current === 0) {
+                const bgImage = raceitems[raceindex].dataset.bg;
+                if (bgImage) {
+                    formPage.style.backgroundImage = `url('${bgImage}')`;
+                }
+            }
         }
     });
 });
 
-// RACE - navigation
 const raceitems = document.querySelectorAll('.raceitem');
 const raceinfos = document.querySelectorAll('.raceinfo');
 let raceindex = 0;
@@ -38,6 +48,11 @@ function showRace(index) {
     raceinfos.forEach(r => r.style.display = 'none');
     raceitems[index].style.display = 'block';
     raceinfos[index].style.display = 'block';
+    
+    const bgImage = raceitems[index].dataset.bg;
+    if (bgImage && formPage) {
+        formPage.style.backgroundImage = `url('${bgImage}')`;
+    }
 }
 
 showRace(0);
@@ -57,7 +72,6 @@ document.getElementById('raceselect').addEventListener('click', () => {
     document.querySelector('#character_race').value = id;
 });
 
-// CLASSE - cartes tarot
 document.querySelectorAll('.tarotcard').forEach(card => {
     card.addEventListener('click', () => {
         document.querySelectorAll('.tarotcard').forEach(c => c.classList.remove('selected'));

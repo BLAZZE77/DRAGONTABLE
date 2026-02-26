@@ -3,8 +3,23 @@
 {% block title %}Modifier {{ character.name }}{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit">Sauvegarder</button>
-    {{ form_end(form) }}
+<section class="form-page">
+    <div class="form-container">
+        <h1>Modifier {{ character.name }}</h1>
+
+        {{ form_start(form, {'attr': {'class': 'character-form'}}) }}
+            {{ form_row(form.name, { label: 'Nom du personnage' }) }}
+            {{ form_row(form.race, { label: 'Race' }) }}
+            {{ form_row(form.classe, { label: 'Classe' }) }}
+            {{ form_row(form.background, { label: 'Background' }) }}
+            {{ form_row(form.description, { label: 'Description' }) }}
+            {{ form_row(form.physique, { label: 'Apparence physique' }) }}
+
+            <div class="form-actions">
+                <a href="{{ path('app_character') }}" class="btn btnoutline">Annuler</a>
+                <button type="submit" class="btn btnsolid">Sauvegarder</button>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</section>
 {% endblock %}

@@ -12,6 +12,7 @@
     }
 }) }}
 
+
 <div class="wizardbar">
     <div class="wizardstep active" data-step="1">Race</div>
     <div class="wizardstep" data-step="2">Classe</div>
@@ -22,15 +23,13 @@
 
 <div class="wizardpage nopadding  active" id="step1">
     <div class="raceselect">
-        
         <div class="racegauche">
-           
-            <div class="raceimg">
-                {% for race in races %}
-                    <div class="raceitem" data-id="{{ race.id }}" style="display:none">
-                        <img src="{{ asset('img/site/race/' ~ race.name|lower ~ '.png') }}">
-                    </div>
-                {% endfor %}
+           <div class="raceimg">
+            {% for race in races %}
+                <div class="raceitem" data-id="{{ race.id }}" data-bg="{{ asset('img/site/race/bg/' ~ race.name|lower ~ '.webp') }}" style="display:none">
+                    <img src="{{ asset('img/site/race/' ~ race.name|lower ~ '.png') }}">
+                </div>
+            {% endfor %}
             </div>
             <div class="racearrows">
                 <button type="button" id="raceprev" class="racearrow">‹</button>
@@ -126,7 +125,7 @@
 
     <div class="wizardnav">
         <button type="button" class="btn-wizard-prev">← Retour</button>
-        <button type="submit" class="btn-wizard-submit">Créer mon personnage</button>
+        <button type="submit" class="btn-wizard-submit">Creer mon personnage</button>
     </div>
 </div>
 

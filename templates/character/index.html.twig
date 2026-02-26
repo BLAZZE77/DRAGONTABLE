@@ -1,23 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CharacterController!{% endblock %}
+{% block title %}Mes Personnages | DragonTable{% endblock %}
 
 {% block body %}
+<section class="characters">
+    <div class="characters-header">
+        <h1>Mes Personnages</h1>
+        <a href="{{ path('app_newcharacter') }}" class="btn btnsolid"> Creer un personnage</a>
+    </div>
+
     {% for flash_error in app.flashes('succes') %}
-            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        <div class="alert alert-success">{{ flash_error }}</div>
     {% endfor %}
 
-    {% for character in character %} 
-                <div class="card">
-                        <img src="{{ asset('img/user/chara/' ~ character.imageName) }}">
-                    <div class="card-content">
-                        <h3>{{character.name}}</h3>
-                        <p>{{character.race.name}}</p>
-                        <p>{{character.classe.name}}</p>
-                        <p>{{character.background.name}}</p>
+    {% if character is empty %}
+        <div class="characters-empty">
+            <p>Vous n'avez pas encore de personnage.</p>
+            <a href="{{ path('app_newcharacter') }}" class="btn btnsolid">Creer mon premier personnage</a>
+        </div>
+    {% else %}
+        <div class="characters-grid">
+            {% for chara in character %}
+                <article class="card">
+                    <div class="card-image">
+                        {% if chara.imageName %}
+                            <img src="{{ asset('img/user/chara/' ~ chara.imageName) }}" alt="{{ chara.name }}">
+                        {% else %}
+                            <img src="{{ asset('img/site/default-character.png') }}" alt="Image par défaut">
+                        {% endif %}
                     </div>
-                    <a href="{{ path('app_character_delete', {id: character.id}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnage ?')">Supprimer</a>
-                    <a href="{{ path('app_character_edit', {id: character.id}) }}">Modifier</a>
-                </div>  
-        {% endfor %}
+                    
+                    <div class="card-content">
+                        <h3 class="card-name">{{ chara.name }}</h3>
+                        
+                        <div class="card-info">
+                            <span class="card-race">{{ chara.race.name }}</span>
+                            <span class="card-separator">•</span>
+                            <span class="card-classe">{{ chara.classe.name }}</span>
+                        </div>
+                        
+                        <p class="card-background">{{ chara.background.name }}</p>
+                        
+                        {% if chara.description %}
+                            <p class="card-description">{{ chara.description|length > 100 ? chara.description|slice(0, 100) ~ '...' : chara.description }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="card-actions">
+                        <a href="{{ path('app_character_edit', {id: chara.id}) }}" class="btn-card btn-edit">Modifier</a>
+                        <a href="{{ path('app_character_delete', {id: chara.id}) }}" class="btn-card btnsolid" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnage ?')">Supprimer</a>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% endif %}
+</section>
 {% endblock %}
